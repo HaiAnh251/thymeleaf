@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nx/thymeleaf/layout"
+		layout:decorate="~{admin/layout-admin.html}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section class="row" layout:fragment="content">
+		<div class="col-6 offset-3 mt-4">
+			<form th:action="@{/admin/categories/saveOrUpdate}" method="POST" th:object="${category}">
+				<div class="card">
+					<div class="card-header">
+						<h2 th:text="${category.isEdit ? 'Edit Category' : 'Add Category'}">Add new Category</h2>
+					</div>
+				<div class="card-body">
+					<div class="mb-3" th:if="${category.isEdit}">
+						<label for="categoryId" class="form-label">Category ID</label>
+						<input type="hidden" th:field="*{isEdit}">
+						<input
+						type="text" readonly="readonly" class="form-control" th:field="*{categoryId}"
+						id="categoryId" name="categoryId" aria-describedby="categoryIdid" placeholder="Category ID">
+						<div th:if="${#fields.hasErrors('categoryId')}"
+						id="categoryIdid" class="form-text text muted"><span class="text-danger">Category ID is required</span></div>
+					</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">Category Name: </label>
+						<input type="text" class="form-control" th:field="*{name}" id="name" name="name"
+						aria-describedby="nameid" placeholder="Category name">
+						<div th:if="${#fields.hasErrors('name')}"
+						id="nameid" class="form-text text muted"><span class="text-danger">Category name is required</span></div>
+					</div>
+					<button type="submit" class="btn btn-primary">Add</button>
+				</div>
+			</div>
+			</form>
+		</div>
+	</section>
+
+</body>
+</html>

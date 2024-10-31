@@ -13,13 +13,13 @@
 					</div>
 				<div class="card-body">
 					<div class="mb-3" th:if="${category.isEdit}">
-						<label for="categoryId" class="form-label">Category ID</label>
+						<label for="categoryid" class="form-label">Category ID</label>
 						<input type="hidden" th:field="*{isEdit}">
 						<input
-						type="text" readonly="readonly" class="form-control" th:field="*{categoryId}"
-						id="categoryId" name="categoryId" aria-describedby="categoryIdid" placeholder="Category ID">
-						<div th:if="${#fields.hasErrors('categoryId')}"
-						id="categoryIdid" class="form-text text muted"><span class="text-danger">Category ID is required</span></div>
+						type="text" readonly="readonly" class="form-control" th:field="*{categoryid}"
+						id="categoryid" name="categoryid" aria-describedby="categoryid" placeholder="Category ID">
+						<div th:if="${#fields.hasErrors('categoryid')}"
+						id="categoryid" class="form-text text muted"><span class="text-danger">Category ID is required</span></div>
 					</div>
 					<div class="mb-3">
 						<label for="name" class="form-label">Category Name: </label>

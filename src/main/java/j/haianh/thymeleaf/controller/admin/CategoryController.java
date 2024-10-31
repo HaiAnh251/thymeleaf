@@ -79,8 +79,8 @@ public class CategoryController {
 		return new ModelAndView("forward:/admin/categories", model);
 	}
 	
-	@GetMapping("edit/{categoryId}")
-	public ModelAndView edit(ModelMap model, @PathVariable("categoryId") Long categoryId) {
+	@GetMapping("edit/{categoryid}")
+	public ModelAndView edit(ModelMap model, @PathVariable("categoryid") Long categoryId) {
 		Optional<CategoryEntity> optCate = cateServ.findById(categoryId);
 		CategoryModel cateModel = new CategoryModel();
 		if (optCate.isPresent()) {
@@ -89,7 +89,7 @@ public class CategoryController {
 			BeanUtils.copyProperties(entity, cateModel);
 			cateModel.setIsEdit(true);
 			model.addAttribute("category", cateModel);
-			return new ModelAndView("admin/category/AddOrEdit", model);
+			return new ModelAndView("admin/categories/AddOrEdit", model);
 		}
 		model.addAttribute("message", "category is not existed");
 		return new ModelAndView("forward:/admin/categories", model);

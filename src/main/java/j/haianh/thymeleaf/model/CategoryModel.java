@@ -17,7 +17,7 @@ public class CategoryModel implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	private Long id;
+	private Long categoryid;
 	@NotEmpty(message = "Không được bỏ rỗng")
 	private String name;
 	private String images;

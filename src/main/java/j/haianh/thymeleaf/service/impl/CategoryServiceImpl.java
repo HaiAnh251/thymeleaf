@@ -67,6 +67,14 @@ public class CategoryServiceImpl implements ICategoryService{
 	public void deleteAll() {
 		categoryRepository.deleteAll();
 	}
+
+	public List<CategoryEntity> findByNamecontaining(String name) {
+		return categoryRepository.findByNamecontaining(name);
+	}
+
+	public Page<CategoryEntity> findByNameContaining(String name, java.awt.print.Pageable pageable) {
+		return categoryRepository.findByNameContaining(name, pageable);
+	}
 	
 	
 }

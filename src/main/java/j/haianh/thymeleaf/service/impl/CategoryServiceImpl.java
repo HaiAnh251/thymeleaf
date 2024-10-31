@@ -9,10 +9,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import j.haianh.thymeleaf.entity.CategoryEntity;
 import j.haianh.thymeleaf.repository.CategoryRepository;
 import j.haianh.thymeleaf.service.ICategoryService;
+
 
 @Service
 public class CategoryServiceImpl implements ICategoryService{
@@ -25,7 +27,24 @@ public class CategoryServiceImpl implements ICategoryService{
 	}
 
 	public <S extends CategoryEntity> S save(S entity) {
-		return categoryRepository.save(entity);
+		if(entity.getCategoryid()==null) {
+			return categoryRepository.save(entity);
+		}
+		else
+		{
+			Optional<CategoryEntity> opt=findById(entity.getCategoryid());
+			if(opt.isPresent())
+			{
+				if(StringUtils.isEmpty(entity.getName()))
+				{
+					entity.setName(opt.get().getName());
+				}else
+				{
+					entity.setName(entity.getName());
+				}
+			}
+			return categoryRepository.save(entity);
+		}
 	}
 
 	public <S extends CategoryEntity> Optional<S> findOne(Example<S> example) {
@@ -68,13 +87,25 @@ public class CategoryServiceImpl implements ICategoryService{
 		categoryRepository.deleteAll();
 	}
 
-	public List<CategoryEntity> findByNamecontaining(String name) {
-		return categoryRepository.findByNamecontaining(name);
+	@Override
+	public List<CategoryEntity> findByNameContaining(String name) {
+		return categoryRepository.findByNameContaining(name);
 	}
 
-	public Page<CategoryEntity> findByNameContaining(String name, java.awt.print.Pageable pageable) {
+	@Override
+	public Page<CategoryEntity> findByNameContaining(String name, Pageable pageable) {
 		return categoryRepository.findByNameContaining(name, pageable);
 	}
+
+
+
+
+	
+	
+
+
+
+	
 	
 	
 }
